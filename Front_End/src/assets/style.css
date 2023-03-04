@@ -1,8 +1,34 @@
 .nav-pills .nav-link.active {
-    color: #fff;
-    background-color: orange;
+    color: #ff1616;
+    background-color: rgb(224, 222, 222);
+}
+
+.nav-pills .nav-link {
+    color: rgb(0, 0, 0);
+}
+
+.nav-pills .nav-link:focus {
+    color: rgb(255, 0, 0);
+}
+
+.nav-pills .nav-link:hover {
+    color: rgb(255, 59, 59);
+}
+
+body .nav-pills {
+    font-weight: 650;
+    font-size: 15px;
+    text-align: center;
+}
+
+body div {
+    text-align: center;
+}
+
+body div.sidebar {
+    box-shadow: 10px 0px 10px rgb(0, 0, 0);
 }
 
 .p {
-    color: #ff00ff;
+    color: #ffffff;
 }

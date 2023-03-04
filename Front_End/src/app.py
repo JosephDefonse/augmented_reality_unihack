@@ -11,7 +11,7 @@ app = dash.Dash(__name__, external_stylesheets=["https://codepen.io/chriddyp/pen
 
 navbar = dbc.Navbar(
     children=[
-        dbc.Button("Order Now", outline=True, className="ms-3", id="btn_sidebar"),
+        dbc.Button("Order Now", outline=True, className="ms-4", id="btn_sidebar"),
         dbc.NavbarBrand("Eshaan's Kitchen", className="ms-3"),
     ],
     color="dark",
@@ -19,10 +19,10 @@ navbar = dbc.Navbar(
 )
 
 
-# the style arguments for the sidebar. We use position:fixed and a fixed width
+
 SIDEBAR_STYLE = {
     "position": "fixed",
-    "top": 62.5,
+    "top": 50,
     "left": 0,
     "bottom": 0,
     "width": "16rem",
@@ -30,13 +30,13 @@ SIDEBAR_STYLE = {
     "z-index": 1,
     "overflow-x": "hidden",
     "transition": "all 0.5s",
-    "padding": "0.5rem 1rem",
+    "padding": "1rem 1rem",
     "background-color": "#f8f9fa",
 }
 
 SIDEBAR_HIDEN = {
     "position": "fixed",
-    "top": 62.5,
+    "top": 50,
     "left": "-16rem",
     "bottom": 0,
     "width": "16rem",
@@ -48,8 +48,6 @@ SIDEBAR_HIDEN = {
     "background-color": "#f8f9fa",
 }
 
-# the styles for the main content position it to the right of the sidebar and
-# add some padding.
 CONTENT_STYLE = {
     "transition": "margin-left .5s",
     "margin-left": "18rem",
@@ -68,16 +66,27 @@ CONTENT_STYLE1 = {
 
 sidebar = html.Div(
     [
-        html.H2("Food", className="display-4"),
-        html.Hr(),
         html.P(
-            "Options", className="lead"
+            "Melbourne, VIC", className="lead"
         ),
+        html.Hr(),
         dbc.Nav(
             [
-                dbc.NavLink("Page 1", href="/page-1", id="page-1-link"),
-                dbc.NavLink("Page 2", href="/page-2", id="page-2-link"),
-                dbc.NavLink("Page 3", href="/page-3", id="page-3-link"),
+                dbc.NavLink("COCKTAILS", href="/cocktails", id="page-1-link"),
+                dbc.NavLink("WINE", href="/wine", id="page-2-link"),
+                dbc.NavLink("BEER & CIDER", href="/beer-and-cider", id="page-3-link"),
+                dbc.NavLink("SPIRITS", href="/spirits", id="page-4-link"),
+                dbc.NavLink("NON-ALCOHOLIC", href="/non-alcoholic", id="page-5-link"),
+                dbc.NavLink("COLD DRINKS", href="/cold-drinks", id="page-6-link"),
+                dbc.NavLink("HOT DRINKS", href="/hot-drinks", id="page-7-link"),
+                dbc.NavLink("STARTERS", href="/starters", id="page-8-link"),
+                dbc.NavLink("MAINS", href="/mains", id="page-9-link"),
+                dbc.NavLink("BURGERS", href="/burgers", id="page-10-link"),
+                dbc.NavLink("WRAPS", href="/wraps", id="page-11-link"),
+                dbc.NavLink("SIDES", href="/sides", id="page-12-link"),
+                dbc.NavLink("KIDS MENU", href="/kids-menu", id="page-13-link"),
+                dbc.NavLink("DESERTS", href="/deserts", id="page-14-link"),
+                dbc.NavLink("SAUCES", href="/sauces", id="page-15-link"),
             ],
             vertical=True,
             pills=True,
@@ -131,27 +140,49 @@ def toggle_sidebar(n, nclick):
 
     return sidebar_style, content_style, cur_nclick
 
-# this callback uses the current pathname to set the active state of the
-# corresponding nav link to true, allowing users to tell see page they are on
 @app.callback(
-    [Output(f"page-{i}-link", "active") for i in range(1, 4)],
+    [Output(f"page-{i}-link", "active") for i in range(1, 16)],
     [Input("url", "pathname")],
 )
 def toggle_active_links(pathname):
     if pathname == "/":
         # Treat page 1 as the homepage / index
         return True, False, False
-    return [pathname == f"/page-{i}" for i in range(1, 4)]
+    return [pathname == f"/page-{i}" for i in range(1, 16)]
 
 
 @app.callback(Output("page-content", "children"), [Input("url", "pathname")])
 def render_page_content(pathname):
     if pathname in ["/", "/page-1"]:
-        return html.P("This is the content of page 1!")
+        return html.P("After a fancy drink?")
     elif pathname == "/page-2":
-        return html.P("This is the content of page 2. Yay!")
+        return html.P("Drinking with class tonight")
     elif pathname == "/page-3":
-        return html.P("Oh cool, this is page 3!")
+        return html.P("Out with the mates?")
+    elif pathname == "/page-4":
+        return html.P("Blending with the young crowd")
+    elif pathname == "/page-5":
+        return html.P("Good choice")
+    elif pathname == "/page-6":
+        return html.P("The shakes are amazing")
+    elif pathname == "/page-7":
+        return html.P("Great for a cold night")
+    elif pathname == "/page-8":
+        return html.P("Something to begin the meals")
+    elif pathname == "/page-9":
+        return html.P("It's time to feast!")
+    elif pathname == "/page-10":
+        return html.P("These are massive")
+    elif pathname == "/page-11":
+        return html.P("Lots of goods neatly wrapped")
+    elif pathname == "/page-12":
+        return html.P("Some extra bites")
+    elif pathname == "/page-13":
+        return html.P("There is somehing for everyone")
+    elif pathname == "/page-14":
+        return html.P("Close up dinner with a tasty treat!")
+    elif pathname == "/page-15":
+        return html.P("The most important part of any dish")
     # If the user tries to reach a different page, return a 404 message
     return dbc.Jumbotron(
         [
